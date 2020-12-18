@@ -1,0 +1,15 @@
+.headr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    height: auto;
+    border-bottom: 3px solid black;
+    background-color: white;
+}
+  
+.headr li {
+    display: inline;
+    margin-left: 20px;
+}
+  
