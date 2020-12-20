@@ -1,0 +1,16 @@
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.button {
+  background: #318ce7;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 3rem;
+}

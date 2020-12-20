@@ -1,6 +1,5 @@
-
-p{
-
-    border-top: 3px solid black;
-    text-align: center;
+.footer {
+  border-top: 3px solid black;
+  text-align: center;
+  /* background-color: #318ce7; */
 }

@@ -5,6 +5,9 @@ import {
   getCommentBy,
   postcomment,
   getPostBy,
+  delecomment,
+  newpost,
+  getAllPost,
 } from "../../services/apiRequest";
 import { Link, useParams } from "react-router-dom";
 
@@ -23,7 +26,7 @@ const LookPost = () => {
 
 const CommentsforPost = () => {
   let { id } = useParams();
-  const [comm, setcomments] = useState([]);
+  const [comms, setcomments] = useState([]);
   useEffect(() => {
     const fetchdata = async () => {
       const goodapi = await getCommentBy(id);
@@ -33,8 +36,22 @@ const CommentsforPost = () => {
   }, [setcomments]);
   return (
     <div>
-      {comm.map((comms) => {
-        return <p key={comms.id}>{comms.content}</p>;
+      {comms.map((comm) => {
+        return (
+          <p key={comm.id}>
+            <ul>
+              <li>{comm.content}</li>{" "}
+              <button
+                onClick={async () => {
+                  await delecomment(id, comm.id);
+                  setTimeout("location.reload(true);", 0);
+                }}
+              >
+                DELETE
+              </button>
+            </ul>
+          </p>
+        );
       })}
     </div>
   );
@@ -46,14 +63,16 @@ const Postcomments = () => {
   return (
     <div>
       <textarea
+        className="content"
         onChange={(e) => {
           setcomment(e.target.value);
         }}
       ></textarea>
       <button
+        className="button"
         onClick={async () => {
-          const res = await postcomment(id, commpost);
-          console.log(res);
+          await postcomment(id, commpost);
+          setTimeout("location.reload(true);", 0);
         }}
       >
         {" "}
@@ -63,6 +82,72 @@ const Postcomments = () => {
   );
 };
 
+const NewPost = () => {
+  const [title, setTitle] = useState("");
+  const [contenu, setContenu] = useState("");
+  return (
+    <div>
+      <input
+        onChange={(e) => {
+          setTitle(e.target.value);
+        }}
+        type="text"
+        placeholder="Title"
+      ></input>
+      <textarea
+        className="content"
+        onChange={(e) => {
+          setContenu(e.target.value);
+        }}
+      ></textarea>
+      <button
+        className="button"
+        onClick={async () => {
+          await newpost(title, contenu);
+          setTimeout("location.reload(true);", 0);
+        }}
+      >
+        {" "}
+        Submit{" "}
+      </button>
+    </div>
+  );
+};
+
+const AuthorPost = () => {
+  let { id } = useParams();
+  id = parseInt(id, 10);
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const fetchdata = async () => {
+      const goodapi = await getAllPost();
+      console.log(id);
+      const boo = goodapi.data.result.filter((item) => {
+        return item.author === id;
+      });
+      setPosts(boo);
+    };
+
+    fetchdata();
+    console.log(posts);
+  }, [setPosts]);
+  return (
+    <div>
+      {posts.map((post) => {
+        return (
+          <div key={post.id}>
+            <Link to={"/post/" + post.id}>{post.title}</Link>
+
+            {post.created_at}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 export { LookPost };
 export { CommentsforPost };
 export { Postcomments };
+export { NewPost };
+export { AuthorPost };

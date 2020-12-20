@@ -1,15 +1,29 @@
 .headr {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    height: auto;
-    border-bottom: 3px solid black;
-    background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  border-bottom: 3px solid black;
+  background-color: #318ce7;
 }
-  
 .headr li {
-    display: inline;
-    margin-left: 20px;
+  display: inline;
+  text-decoration: none;
+  margin-left: 15px;
+  margin-right: 5px;
 }
-  
+
+.headr h1 {
+  padding: 1em;
+  color: #ec008c;
+}
+
+.headr h1:hover {
+  color: white;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+}

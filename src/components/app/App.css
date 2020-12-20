@@ -1,0 +1,17 @@
+.postI {
+  width: 35em;
+  height: 1em;
+  display: flex;
+  flex-flow: column wrap;
+  background-color: #318ce7;
+  border-radius: 20px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  line-height: 1.1em;
+  color: white;
+}
+
+.postI :hover {
+  color: white;
+}

@@ -6,13 +6,16 @@ const apiKey =
 const baseUrl = "https://supdevinci.nine1000.tech";
 
 const getAllAuthors = async () => {
-  return await axios(`${baseUrl}/authors`);
+  return await axios(`${baseUrl}/authors?limit=50`);
 };
 
-//boucle while pour recuper les post que je vais ajouter le tableau  pour augmenter le offset
-
-const getAllPost = async () => {
-  return await axios(`${baseUrl}/posts?limit=300`);
+const getAllPost = async (nbcomms = 0) => {
+  const res1 = await axios(`${baseUrl}/posts?limit=0`);
+  let nb = res1.data.count;
+  if (nbcomms !== 0 && nb > nbcomms) {
+    nb = nbcomms;
+  }
+  return await axios(`${baseUrl}/posts?limit=${nb}`);
 };
 
 const getPostBy = async (id) => {
@@ -43,6 +46,28 @@ const postcomment = async (id, commment) => {
   );
 };
 
+const newpost = async (titre, commentaire) => {
+  return await axios.post(
+    `${baseUrl}/posts`,
+    {
+      title: titre,
+      content: commentaire,
+    },
+    {
+      headers: {
+        "x-token": apiKey,
+      },
+    }
+  );
+};
+
+const delecomment = async (postId, commId) => {
+  return axios.delete(`${baseUrl}/posts/${postId}/comments/${commId}`, {
+    headers: {
+      "x-token": apiKey,
+    },
+  });
+};
 export { getAllAuthors };
 export { getAllPost };
 export { getPostBy };
@@ -50,6 +75,8 @@ export { getCommentBy };
 export { UpdatePost };
 export { Updatecomment };
 export { postcomment };
+export { delecomment };
+export { newpost };
 /*
 faire les meme methode pour tous les requetes adaptationprend des parametre selon l id tous sa
 
