@@ -77,7 +77,3 @@ export { Updatecomment };
 export { postcomment };
 export { delecomment };
 export { newpost };
-/*
-faire les meme methode pour tous les requetes adaptationprend des parametre selon l id tous sa
-
-*/
